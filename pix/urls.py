@@ -1,4 +1,4 @@
-"""pop URL Configuration
+"""pix URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -25,8 +25,8 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("planning/", scheduling_view),
-    path("inscription/", scheduling_booking),
-    path("", home_view),
+    path("", scheduling_booking),
+    # path("", home_view),
     path(
         "favicon.ico",
         RedirectView.as_view(url=staticfiles_storage.url("img/favicon.ico")),

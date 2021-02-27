@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.core.mail import EmailMessage
 import requests
-from pop import settings
+from pix import settings
 
 
 def scheduling(request, config):
@@ -66,15 +66,12 @@ def scheduling(request, config):
 def body_email(apps):
     r = "\n"
     s = (
-        f"Nous vous confirmons que votre inscription aux portes ouvertes du lycée Aristide Briand est validée.\n\n"
-        f"Vous êtes attendu(e)s :\n"
-        f"""{r.join(f"- le {a['schedule__datetime'].strftime('%A %d/%m')} à {a['schedule__datetime'].strftime('%H:%M')} pour visiter l'emplacement {a['place__name']}"for a in apps)}"""
+        f"Nous vous confirmons que votre inscription à la certification Pix du lycée Aristide Briand est validée.\n\n"
+        f"Vous êtes attendu(e)s à {a['place__name']}\n"
         f"\n\n"
-        f"Le port du masque est obligatoire sur toute la cité scolaire. L'élève doit être accompagné par un seul adulte référent.\n"
-        f"Assurez-vous de pouvoir présenter cet email à l'entrée de la cité scolaire, soit sur papier, soit directement sur un smartphone.\n"
-        f"Si vous voulez modifier un créneau ou le supprimer, répondez directement à cet email en précisant bien votre demande."
+        f"Si vous voulez modifier un créneau ou le supprimer, écrivez à ."
         f"\n\n"
-        f"Le lycée Aristide Briand"
+        f"RUPN du lycée Aristide Briand"
         f"\n\n"
     )
     return s
@@ -84,14 +81,11 @@ def body_email_test(apps):
     r = "\n"
     s = (
         f"Nous vous confirmons que le test de votre inscription aux portes ouvertes du lycée Aristide Briand est réussi.\n\n"
-        f"Vous seriez attendu(e)s si ce n'était pas un test :\n"
-        f"""{r.join(f"- le {a['schedule__datetime'].strftime('%A %d/%m')} à {a['schedule__datetime'].strftime('%H:%M')} pour visiter l'emplacement {a['place__name']}"for a in apps)}"""
+        f"Vous seriez attendu(e)s si ce n'était pas un test à {a['place__name']}\n"
         f"\n\n"
-        f"Le port du masque est obligatoire sur toute la cité scolaire. L'élève doit être accompagné par un seul adulte référent.\n"
-        f"Assurez-vous de pouvoir présenter cet email à l'entrée de la cité scolaire, soit sur papier, soit directement sur un smartphone.\n"
-        f"Si vous voulez modifier un créneau ou le supprimer, répondez directement à cet email en précisant bien votre demande."
+        f"Si vous voulez modifier un créneau ou le supprimer, écrivez à ."
         f"\n\n"
-        f"Le lycée Aristide Briand"
+        f"RUPN du lycée Aristide Briand"
         f"\n\n"
     )
     return s

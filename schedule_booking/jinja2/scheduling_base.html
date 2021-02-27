@@ -1,14 +1,15 @@
 {% for day in days %}
 <div class="table-responsive">
   <table id="table{{ loop.index }}" class="table table-bordered" {% if loop.index > 1 %} hidden {% endif %}>
+    <!--- 
     <thead>
       <tr>
         <th scope="col">
-          <!--- <div class="btn-group-vertical">
+          <div class="btn-group-vertical">
             <button onclick="previousday({{ loop.index }})" type="button" {% if loop.index == 1 or loop.length == 1 %} disable {% endif %} class="btn btn-secondary">&lt;</button> 
             <span class="input-group-text">{{ day.strftime("%A %d/%m") }}</span>
             <button onclick="nextday({{ loop.index }})" type="button" {% if loop.revindex == 1 or loop.length == 1 %} disable {% endif %} class="btn btn-secondary">&gt;</button> 
-          </div> --->
+          </div> 
           {{ day.strftime("%A %d/%m") }}
         </th>
         {% for hour in schedules[day] %}
@@ -17,7 +18,7 @@
         {% endfor %}
         <th scope="col"></th>
       </tr>
-    </thead>
+    </thead> --->
     <tbody>
     {% for place in places %}
       <tr>
@@ -26,10 +27,11 @@
         {% block cell scoped %}
         {% endblock %}
         {% endfor %}
-        <th scope="col">{{place}}</th>
+        <!---<th scope="col">{{place}}</th>--->
       </tr>
     {% endfor %}
     </tbody>
+    <!---
     <tfoot>
       <th scope="col">
         {{ day.strftime("%A %d/%m") }}
@@ -39,7 +41,7 @@
       {% endblock %}
       {% endfor %}
       <th scope="col"></th>
-    </tfoot>
+    </tfoot>--->
   </table>
 </div>
 {% endfor %}

@@ -2,29 +2,22 @@
 
 {% block navbar %}
 <li class="nav-item">
-  <a class="nav-link" href="/">Accueil</a>
+  <a class="nav-link active" href="/">Inscription</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="/planning/">Planning</a>
 </li>
-<li class="nav-item">
+<!--- <li class="nav-item">
   <a class="nav-link active" href="/inscription/">Inscription</a>
-</li>
+</li> --->
 {% endblock %}
 
 {% block content %}
 {% if config.beta_test %}
 <div class="alert alert-danger" role="alert">
-  Ce site est pour l'instant en test. <strong>Toutes les inscriptions seront effacées avant la mise en service.</strong> Si vous êtes arrivés ici par hasard, regardez <a class="alert-link" href="https://aristide-briand.paysdelaloire.e-lyco.fr/">ici</a> pour des informations sur les portes ouvertes.
+  Ce site est pour l'instant en test. <strong>Toutes les inscriptions seront effacées avant la mise en service.</strong>
 </div>
 {% endif %}
-<p>Afin de réguler l'affluence et garantir la sécurité de tous, la participation aux portes ouvertes du lycée Aristide Briand se fait uniquement sur inscription. Une seule inscription est demandée par famille.</p>
-<div class="alert alert-warning" role="alert">
-  Toujours dans un souci de limiter les affluences, il est demandé qu'il n'y ait qu'un seul accompagnateur (un adulte référent) par élève.
-</div>
-<div class="alert alert-warning" role="alert">
-  Le port du masque est obligatoire sur tout le site.
-</div>
 {% if config.rgpd %}
 <div class="alert alert-warning" role="alert">
   Les données récoltées sont utilisées uniquement dans le cadre des portes ouvertes du lycée Aristide Briand (association des personnes aux créneaux horaires, rappel par email de l'inscription et des éventuelles modifications liées aux portes ouvertes). Elles seront toutes effacées après cet évènement. 
@@ -46,15 +39,11 @@
   <div class="form-floating mb-3">
     <select name="school" class="form-control" id="school" value="{{ request.POST['school']|default() }}" required>
       <option selected></option>
-      {% for schoolgroup in schools %}
-      <optgroup label="{{schoolgroup[0]}}">
-        {% for school in schoolgroup[1] %}
-        <option value="{{school[0]}}">{{school[1]}}</option>
-        {% endfor %}
-      </optgroup>
+      {% for school in schools %}
+      <option value="{{school[0]}}">{{school[1]}}</option>
       {% endfor %}
     </select>
-    <label for="school">Etablissement d'origine</label>
+    <label for="school">Classe</label>
   </div>
   {% endif %}
   <div class="form-floating mb-3">
@@ -69,8 +58,7 @@
     <div id="validationescort" class="invalid-feedback">{% if errors is defined and errors.message_dict["escort"] is defined %} {{ errors.message_dict["escort"][0] }} {% endif %}</div>
   </div>
   {% endif %}
-  <p>Le planning ci-dessous vous permet, pour chaque filière ou formation, de choisir le créneau horaire le plus favorable en fontion de vos disponibilités. Si vous voulez visiter plusieurs lieux, vous pouvez sélectionner jusqu'à {{ config.max_slot }} créneaux à des heures et des lieux différents.
-    {% if config.show_people %} Dans chaque case, la première valeur indique le nombre de {% if not config.max_escort %}familles (un élève et un adulte référent){% else %}personnes{% endif %}{% endif %} déjà inscrites. La deuxième valeur indique la jauge maximale.
+  <p>Le planning ci-dessous vous permet, pour chaque filière ou formation, de choisir le créneau horaire le plus favorable en fontion de vos disponibilités.{% if config.show_people %} Dans chaque case, la première valeur indique le nombre de personnes déjà inscrites. La deuxième valeur indique la jauge maximale.{% endif %}
     Si la case est verte, il reste encore des places. Si la case est grise, le créneau est complet.</p>
   {% include "scheduling_booking.html" %}
   {% if config.recaptcha %}
@@ -135,20 +123,6 @@
     slots.forEach(slot => {
       if (slot.checked){
         num+=1;
-        {% if config.school %}
-        const slot_value = slot.value;
-        const schedule = slot_value.substring(slot_value.indexOf("-")+1);
-        const input = document.getElementById("btn-check-" + schedule);
-        const authorizeds = input.getAttribute("data-authorizeds").split(" ");
-        const school_choice = document.getElementById("school").value.substring(0,2);
-        if (!authorizeds.includes(school_choice))
-        {
-          const alert = document.getElementById("schedulingerror2");
-          alert.innerHTML = t3;
-          alert.removeAttribute("hidden");
-          authorized = false;
-        }
-        {% endif %}
       };
     });
     if (num==0){
@@ -172,14 +146,12 @@
   const max_slot = 1;
   const t1 = "Vous devez sélectionner un créneau horaire.";
   const t2 = "Vous devez sélectionner au plus un créneau horaire.";
-  const t3 = "Au vu de votre établissement d'origine, vous ne pouvez pas sélectionner cet horaire. Vérifiez sur <a class='alert-link' href='/'>la page d'accueil</a> les horaires qui vous sont réservés.";
 </script>
 {% else %}
 <script>
   const max_slot = {{ config.max_slot }};
   const t1 = "Vous devez sélectionner un ou plusieurs créneaux horaires.";
   const t2 = "Vous devez sélectionner au plus " + max_slot + " créneaux horaires.";
-  const t3 = "Au vu de votre établissement d'origine, vous ne pouvez pas sélectionner un ou plusieurs de ces horaires. Vérifiez sur <a class='alert-link' href='/'>la page d'accueil</a> les horaires qui vous sont réservés.";
 </script>
 {% endif %}
 {% endblock %}
