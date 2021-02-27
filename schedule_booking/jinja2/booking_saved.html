@@ -15,14 +15,6 @@
 {% block content %}
 <br>
 <p>Votre inscription a bien été enregistrée.</p>
-<p>Vous êtes attendu(e)s :
-  <ul>
-    {% for a in apps %}
-    <li>
-      le {{ a.schedule__datetime.strftime("%A %d/%m") }} à {{ a.schedule__datetime.strftime("%H:%M") }} pour passer la certification Pix.
-    </li>
-    {% endfor %}
-  </ul>
-</p>
+<p>Vous êtes attendu(e)s le {{ apps[0].place__name }} pour passer la certification Pix.</p>
 <p>Vous devriez recevoir un email de confirmation à l'adresse {{ email }}.</p>
 {% endblock %}

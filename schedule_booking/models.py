@@ -85,7 +85,7 @@ class Schedule(models.Model):
     datetime = models.DateTimeField(help_text="Date et heure du créneau")
     authorizeds = models.CharField(
         max_length=300,
-        default="CS CB AU",
+        default="",
         help_text="Authorisation en fonction de l'école (groupes espacés de 2 lettres)",
     )
 
