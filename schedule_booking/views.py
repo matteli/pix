@@ -67,9 +67,10 @@ def body_email(apps):
     r = "\n"
     s = (
         f"Nous vous confirmons que votre inscription à la certification Pix du lycée Aristide Briand est validée.\n\n"
-        f"Vous êtes attendu(e)s à {apps[0]['place__name']}\n"
+        f"Vous êtes attendu(e)s le {apps[0]['place__name']}\n"
+        f"Le jour de l'épreuve, déplacez-vous dans l'ordre des salles indiquées entre parenthèses pour trouver celle où vous êtes attendu(e)s.\n"
         f"\n\n"
-        f"Si vous voulez modifier un créneau ou le supprimer, écrivez à ."
+        f"Si vous voulez modifier un créneau ou le supprimer, précisez-le en répondant à cet email."
         f"\n\n"
         f"RUPN du lycée Aristide Briand"
         f"\n\n"
@@ -80,10 +81,11 @@ def body_email(apps):
 def body_email_test(apps):
     r = "\n"
     s = (
-        f"Nous vous confirmons que le test de votre inscription aux portes ouvertes du lycée Aristide Briand est réussi.\n\n"
-        f"Vous seriez attendu(e)s si ce n'était pas un test à {apps[0]['place__name']}\n"
+        f"Nous vous confirmons que le test de votre inscription à la certification Pix du lycée Aristide Briand est réussi.\n\n"
+        f"Vous seriez attendu(e)s si ce n'était pas un test le {apps[0]['place__name']}\n"
+        f"Le jour de l'épreuve, déplacez-vous dans l'ordre des salles indiquées entre parenthèses pour trouver celle où vous êtes attendu(e)s.\n"
         f"\n\n"
-        f"Si vous voulez modifier un créneau ou le supprimer, écrivez à ."
+        f"Si vous voulez modifier un créneau ou le supprimer, précisez-le en répondant à cet email."
         f"\n\n"
         f"RUPN du lycée Aristide Briand"
         f"\n\n"
