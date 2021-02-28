@@ -230,7 +230,7 @@ def scheduling_booking(request):
         apps_dict = apps.values("place__name", "schedule__datetime")
         if config_send_email_confirmation:
             email = EmailMessage(
-                "Inscription aux portes ouvertes du lycée Aristide Briand",
+                "Inscription à la certification Pix du lycée Aristide Briand",
                 body_email(apps_dict)
                 if not config["beta_test"]
                 else body_email_test(apps_dict),
