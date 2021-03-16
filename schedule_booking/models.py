@@ -197,7 +197,7 @@ class Student(models.Model):
     lastname = models.CharField(max_length=100, verbose_name="Nom")
     firstname = models.CharField(max_length=100, verbose_name="Prénom")
     school = models.CharField(
-        max_length=4,
+        max_length=10,
         choices=SCHOOLS_CHOICE,
         default="AU02",
         verbose_name="Etablissement d'origine",
